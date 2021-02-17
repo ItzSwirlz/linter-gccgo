@@ -1,0 +1,103 @@
+{
+  "name": "linter-gccgo",
+  "linter-package": true,
+  "main": "./lib/linter-gccgo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Check Go files with gccgo tool",
+  "keywords": [
+    "go",
+    "golang",
+    "linter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AtomLinter/linter-gccgo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AtomLinter/linter-gccgo/issues"
+  },
+  "homepage": "https://github.com/AtomLinter/linter-gccgo",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.9.0 <2.0.0"
+  },
+  "configSchema": {
+    "executablePath": {
+      "title": "gccgo Executable Path",
+      "type": "string",
+      "description": "The path to the `gccgo` executable. Find by running `which go`",
+      "default": "gccgo"
+    },
+    "verboseMode": {
+      "type": "boolean",
+      "default": true,
+      "description": "Verbose mode for `gccgo` command"
+    },
+    "extraOptions": {
+      "type": "string",
+      "default": "",
+      "description": "Options for `gccgo` command"
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "atom --test spec"
+  },
+  "dependencies": {
+    "atom-linter": "10.0.0",
+    "atom-package-deps": "7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "7.18.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "2.22.1",
+    "jasmine-fix": "1.3.1"
+  },
+  "renovate": {
+    "extends": [
+      "config:base"
+    ],
+    "semanticCommits": true,
+    "rangeStrategy": "pin",
+    "packageRules": [
+      {
+        "packagePatterns": [
+          "^eslint"
+        ],
+        "groupName": "ESLint packages"
+      }
+    ]
+  },
+  "package-deps": [
+    "linter:2.0.0"
+  ],
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "2.0.0": "provideLinter"
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "global-require": "off",
+      "import/no-unresolved": [
+        "error",
+        {
+          "ignore": [
+            "atom"
+          ]
+        }
+      ]
+    },
+    "globals": {
+      "atom": true
+    },
+    "env": {
+      "node": true,
+      "browser": true
+    }
+  }
+}
